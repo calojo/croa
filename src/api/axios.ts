@@ -23,7 +23,6 @@ api.interceptors.response.use(
       // aquí luego manejamos refresh token
       console.log("Unauthorized - redirigir a login");
       localStorage.removeItem("token");
-      window.location.href = "/login";
     }
     return Promise.reject(error);
   }

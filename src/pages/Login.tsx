@@ -1,33 +1,56 @@
 import { useState } from "react";
-import { login  } from "../services/authService";
+import { login  } from "../services/loginServices";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const setAuth = useAuthStore((state) => state.setAuth);
+  //const setAuth = useAuthStore((state) => state.setAuth);
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    if (!user || !password) return;
+const handleLogin = async (e?: React.FormEvent) => {
+  e?.preventDefault();
 
-    try {
-      setLoading(true);
+  if (!user || !password) return;
 
-      const data = await login(user, password);
+  try {
+    setLoading(true);
 
-      setAuth(data.access_token, data.user);
-
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Login error", error);
-    } finally {
-      setLoading(false);
+    const data = await login(user, password);
+    console.log("Data del login:", data);
+    if (!data) {
+      toast.error("Credenciales inválidas");
+      return;
     }
-  };
+    
+   useAuthStore.getState().setAuth(data.access_token, {
+      username: data.username,
+      company_id: data.company_id,
+      branch_id: data.branch_id,
+      role_id: data.rol_id,
+    });
+
+
+
+    //setAuth(data.access_token, data.user);
+    navigate("/dashboard");
+
+  } catch (error: any) {
+    const message =
+      error?.detail ||
+      error?.message ||
+      "Error al iniciar sesión";
+
+    toast.error(message);
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 px-4">
