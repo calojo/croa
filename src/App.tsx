@@ -1,8 +1,5 @@
-import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import ProtectedLayout from "./layout/ProtectedLayout";
+import AppRouter from "./routes/AppRouter";
 
 export default function App() {
   return (
@@ -17,22 +14,7 @@ export default function App() {
           },
         }}
       />
-
-      <Routes>
-        {/* Ruta pública */}
-        <Route path="/login" element={<Login />} />
-
-        {/* Rutas protegidas — todas las que necesiten Sidebar */}
-        <Route element={<ProtectedLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          {/* Agrega aquí el resto de tus rutas protegidas */}
-          {/* <Route path="/facturas" element={<Facturas />} /> */}
-          {/* <Route path="/clientes" element={<Clientes />} /> */}
-        </Route>
-
-        {/* Ruta por defecto */}
-        <Route path="*" element={<Login />} />
-      </Routes>
+      <AppRouter />
     </>
   );
 }

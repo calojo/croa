@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 
 import PrivateRoute from "./PrivateRoute";
-import Clients from "../pages/Clients";
+import Clients from "../pages/maintenance/clients/ClientsPage";
 
 export default function AppRouter() {
   return (
@@ -16,12 +16,9 @@ export default function AppRouter() {
       <Route element={<PrivateRoute />}>
         <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/clientes" element={<Clients />} />
+          <Route path="/maintenance/clients" element={<Clients />} /> {/* ← aquí */}
         </Route>
-        
       </Route>
-
-
     </Routes>
   );
 }

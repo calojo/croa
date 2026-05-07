@@ -1,3 +1,6 @@
+//types/menu.ts
+// This file defines the TypeScript interfaces for menu items and their permissions in a web application.
+
 export interface MenuPermissions {
   can_view: boolean;
   can_create: boolean;

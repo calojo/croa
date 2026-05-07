@@ -9,7 +9,7 @@ export const menuServices = { getMenu: async (): Promise<MenuItem[]> => {
     if (!user) throw new Error("User not authenticated");
 
         const data = await getMenu(user.role_id, user.company_id); // viene de apiMenu.ts
-        console.log("Menu data:", data);
+       
         return data as MenuItem[];
        
         } catch (error: any) {

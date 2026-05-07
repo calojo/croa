@@ -4,6 +4,7 @@ import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
+
 export default function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,7 @@ const handleLogin = async (e?: React.FormEvent) => {
     setLoading(true);
 
     const data = await login(user, password);
-    console.log("Data del login:", data);
+    
     if (!data) {
       toast.error("Credenciales inválidas");
       return;
@@ -33,8 +34,6 @@ const handleLogin = async (e?: React.FormEvent) => {
       branch_id: data.branch_id,
       role_id: data.rol_id,
     });
-
-
 
     //setAuth(data.access_token, data.user);
     navigate("/dashboard");

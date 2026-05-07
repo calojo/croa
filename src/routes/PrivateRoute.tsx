@@ -2,7 +2,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
 export default function PrivateRoute() {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  const token = useAuthStore((state) => state.token);
+  console.log("TOKEN:", token);
+  
+  return token ? <Outlet /> : <Navigate to="/login" />;
 }
