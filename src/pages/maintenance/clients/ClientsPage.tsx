@@ -8,26 +8,10 @@ import {
   deleteClient,
 } from "../../../services/clientService";
 import type { Client, ClientPayload } from "../../../types/client";
-import { useAuthStore} from "../../../store/authStore"; // ajusta el path
 
 
 // ─── Constantes ────────────────────────────────────────────────────────────────
 const ROUTE = "/maintenance/clients";
-
-
-
-
-const ClientsPagef = () => {
-  const { canView, canCreate, canEdit, canDelete, canExport } = usePermissions(ROUTE);
-  
-  // 👇 Temporal para debug
-  const menu = useAuthStore((state) => state.menu);
-  console.log("MENU EN STORE:", menu);
-  console.log("ROUTE buscada:", ROUTE);
-  console.log("canView:", canView);
-}
-
-
 
 
 const EMPTY_FORM: ClientPayload = {
@@ -41,6 +25,8 @@ const EMPTY_FORM: ClientPayload = {
   type_person: "",
   tax_id: "",
   notes: "",
+  company_id: 0,
+  branch_id: 0,
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
@@ -153,6 +139,8 @@ const ClientDrawer = ({
               type_person: initial.type_person,
               tax_id: initial.tax_id,
               notes: initial.notes,
+              "company_id": initial.company_id,
+              "branch_id": initial.branch_id,
             }
           : EMPTY_FORM
       );
@@ -260,7 +248,7 @@ const ClientDrawer = ({
               <Field label="RNC / Cédula">
                 <input
                   type="text"
-                  value={form.tax_id}
+                  value={form.tax_id ?? ""}
                   onChange={(e) => set("tax_id", e.target.value)}
                   placeholder="000-0000000-0"
                   className={inputCls()}
@@ -278,7 +266,7 @@ const ClientDrawer = ({
               <Field label="Correo electrónico" error={errors.email}>
                 <input
                   type="email"
-                  value={form.email}
+                  value={form.email ?? ""}
                   onChange={(e) => set("email", e.target.value)}
                   placeholder="cliente@empresa.com"
                   className={inputCls(errors.email)}
@@ -288,7 +276,7 @@ const ClientDrawer = ({
               <Field label="Teléfono">
                 <input
                   type="text"
-                  value={form.phone}
+                  value={form.phone ?? ""}
                   onChange={(e) => set("phone", e.target.value)}
                   placeholder="(809) 000-0000"
                   className={inputCls()}
@@ -298,7 +286,7 @@ const ClientDrawer = ({
               <Field label="Dirección">
                 <input
                   type="text"
-                  value={form.address}
+                  value={form.address ?? ""}
                   onChange={(e) => set("address", e.target.value)}
                   placeholder="Calle, ciudad, provincia"
                   className={inputCls()}
@@ -343,7 +331,7 @@ const ClientDrawer = ({
               Notas
             </p>
             <textarea
-              value={form.notes}
+              value={form.notes ?? ""}
               onChange={(e) => set("notes", e.target.value)}
               rows={3}
               placeholder="Observaciones adicionales..."

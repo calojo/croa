@@ -1,18 +1,17 @@
 export interface Client {
   id: number;
   name: string;
-  email: string;
-  phone: string;
-  address: string;
+  email: string | null;
+  phone: string | null;
+  address: string | null;
   credit_limit: number;
   balance: number;
   status: string;
   type_person: string;
-  tax_id: string;
-  notes: string;
+  tax_id: string | null;
+  notes: string | null;
   company_id: number;
   branch_id: number;
 }
 
-// Lo que el formulario envía — sin campos que inyecta el backend/token
-export type ClientPayload = Omit<Client, "id" | "company_id" | "branch_id">;
+export type ClientPayload = Omit<Client, "id">;

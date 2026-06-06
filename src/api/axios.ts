@@ -26,6 +26,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       // aquí luego manejamos refresh token
       console.log("Unauthorized - redirigir a login");
+      window.location.href = "/login";
       localStorage.removeItem("token");
     }
     return Promise.reject(error);
