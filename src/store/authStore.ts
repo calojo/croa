@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 import type { MenuItem, MenuPermissions } from "../types/menu";
 
 type User = {
+  user_id: number;
   username: string;
   company_id: number;
   branch_id: number;

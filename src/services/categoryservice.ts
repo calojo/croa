@@ -24,6 +24,7 @@ export const getCategory = async (id: number): Promise<Category> => {
   return res.data;
 };
 
+
 /**
  * Create a category, then optionally:
  *  1. Upload the image  → get back the url

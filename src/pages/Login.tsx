@@ -29,6 +29,7 @@ const handleLogin = async (e?: React.FormEvent) => {
     }
     
    useAuthStore.getState().setAuth(data.access_token, {
+      user_id: data.user_id,
       username: data.username,
       company_id: data.company_id,
       branch_id: data.branch_id,

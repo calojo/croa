@@ -4,7 +4,7 @@ import {
   postClient,
   putClient,
   deleteClientApi,
-} from "../api/clientsApi";
+} from "../api/apiClients";
 
 import { useAuthStore } from "../store/authStore";
 import type { Client, ClientPayload } from "../types/client";

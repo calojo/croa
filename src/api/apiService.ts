@@ -12,6 +12,6 @@ export const loginService = async (username: string,password: string) => {
       // error del backend
       throw error.response.data;
     }    
-    throw { message: "Network error" };
+    throw { message: error.response.data.message};
   }
 };
